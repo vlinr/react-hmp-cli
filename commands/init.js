@@ -9,7 +9,6 @@ const fs = require('fs');
 const path = require('path');
 const ora = require('ora'); // 用于输出loading
 const chalk = require('chalk'); // 用于改变文字颜色
-let branch = 'master';
 //调用hmp init name 后执行的action
 const initAction = async (name, option) => {
     // 检查是否有git
@@ -26,18 +25,15 @@ const initAction = async (name, option) => {
         console.log(symbols.error, 'Illegal characters in project name！');
         return;
     }
-    //获取option里面的分支
-    if (option.branch) branch = option.branch;
-
     //下载模板
     if (option.url) {
         if (option.branch) {
-            await clone(`direct:${option.url}#${branch}`, name, { clone: true });
+            await clone(`direct:${option.url}#${option.branch}`, name, { clone: true });
         } else {
             await clone(`direct:${option.url}`, name, { clone: true });
         }
     } else {
-        await clone(`direct:${remote}#${branch}`, name, { clone: true });
+        await clone(`direct:${remote}`, name, { clone: true });
     }
     //清理不需要的文件以及文件夹
     const deleteDir = ['.git', '.gitignore', 'README.md', 'docs'];

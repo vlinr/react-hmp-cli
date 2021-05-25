@@ -1,5 +1,5 @@
 const config = {
-    cloneAddr: 'https://gitlab.xijing985.com/lizhongxian/jjg_templete.git'
+    cloneAddr: 'https://github.com/vlinr/react-hmp-templete.git'
 }
 
 module.exports = config;
