@@ -3,7 +3,7 @@
  * 自定义问题
  * 
  * ******/
-async function getUserInput(projectName) {
+async function userInput(projectName) {
     const inquirer = require('inquirer');
     // 定义需要询问的问题
     const questions = [
@@ -54,8 +54,8 @@ async function getUserInput(projectName) {
             name: 'isConfirm'
         }
     ]);
-    if (confirm.isConfirm == 'n' || confirm.isConfirm == 'N' || confirm.isConfirm == 'No' || confirm.isConfirm == 'no' || confirm.isConfirm == 'oN') return false;
+    if (confirm.isConfirm == 'n' || confirm.isConfirm == 'N' || confirm.isConfirm == 'No' || confirm.isConfirm == 'no' || confirm.isConfirm == 'nO') return false;
     return answers;
 }
 
-module.exports = getUserInput;
+module.exports = userInput;

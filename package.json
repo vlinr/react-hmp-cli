@@ -1,6 +1,6 @@
 {
   "name": "react-hmp-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "keywords": [
@@ -8,7 +8,7 @@
     "templete",
     "react"
   ],
-  "e-mail":"zlife@vip.qq.com",
+  "e-mail": "zlife@vip.qq.com",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,9 +22,9 @@
     "commander": "^7.2.0",
     "download-git-repo": "^3.0.2",
     "inquirer": "^8.1.0",
+    "log-symbols": "^4.1.0",
     "node-notifier": "^9.0.1",
     "ora": "^5.4.0",
-    "shelljs": "^0.8.4",
-    "log-symbols": "^4.1.0"
+    "shelljs": "^0.8.4"
   }
 }

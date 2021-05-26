@@ -1,5 +1,5 @@
 const fs = require('fs')
-async function updatePackage(filePath, data) {
+async function writePackageJson(filePath, data) {
     //根据用户配置调整文件
     let jsonData = {};
     if (fs.existsSync(filePath)) { //判断文件是否存在
@@ -21,4 +21,4 @@ async function updatePackage(filePath, data) {
     })
 }
 
-module.exports = updatePackage;
+module.exports = writePackageJson;

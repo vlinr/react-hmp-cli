@@ -1,9 +1,7 @@
-// commands/init.js
 const shell = require('shelljs');
 const symbols = require('log-symbols');
-const clone = require('../utils/clone.js');
-//调用hmp init name 后执行的action
-const initAction = async (name, option) => {
+const clone = require('../utils/clone');
+const download = async (name, option) => {
     // 检查是否有git
     if (!shell.which('git')) {
         console.log(symbols.error, 'Sorry, the git command is not available！');
@@ -21,8 +19,8 @@ const initAction = async (name, option) => {
     const pwd = shell.pwd();
     deleteDir.map(item => shell.rm('-rf', pwd + `/${projectName}/${item}`));
     //依赖安装完成，提示项目创建成功~
-    require('./icon')();
+    require('../utils/console')();
     console.log(symbols.success, 'File downloaded successfully~');
     shell.exit(1);
 };
-module.exports = initAction;
+module.exports = download;

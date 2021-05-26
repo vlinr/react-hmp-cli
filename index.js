@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-//标记为node环境
 const commander = require('commander');
-const initAction = require('./commands/init');//执行函数
-const downloadAction = require('./commands/downloadAction');//执行函数
+const initAction = require('./commands/init');
+const downloadAction = require('./commands/download');
 //初始化模板
 commander.command('init <name>') // 定义init子命令，<name>为必需参数可在action的function中接收，如需设置非必需参数，可使用中括号
     .option('-b, --branch <branch>', 'get the development version') // 配置参数，简写和全写中使用,分割

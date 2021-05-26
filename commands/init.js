@@ -1,16 +1,15 @@
-// commands/init.js
 const shell = require('shelljs');
 const symbols = require('log-symbols');
 const clone = require('../utils/clone');
-const remote = require('../config/config').cloneAddr;
-const getUserInput = require('./getUserInput');
-const updatePackage = require('./updatePackage');
+const remote = require('../config/config').clone_address;
+const userInput = require('../utils/userInput');
+const writePackageJson = require('../utils/writePackageJson');
 const fs = require('fs');
 const path = require('path');
-const ora = require('ora'); // 用于输出loading
-const chalk = require('chalk'); // 用于改变文字颜色
+const ora = require('ora');
+const chalk = require('chalk');
 //调用hmp init name 后执行的action
-const initAction = async (name, option) => {
+const init = async (name, option) => {
     // 检查是否有git
     if (!shell.which('git')) {
         console.log(symbols.error, 'Sorry, the git command is not available！');
@@ -40,10 +39,10 @@ const initAction = async (name, option) => {
     const pwd = shell.pwd();
     deleteDir.map(item => shell.rm('-rf', pwd + `/${name}/${item}`));
     //配置项目
-    const userInput = await getUserInput(name);
-    if (!userInput) return false;
+    const input = await userInput(name);
+    if (!input) return false;
     //重写配置文件
-    await updatePackage(path.join(pwd.stdout, name, 'package.json'), userInput);
+    await writePackageJson(path.join(pwd.stdout, name, 'package.json'), input);
     //开始安装依赖
     const installSpinner = ora('Installing dependencies...').start();
     shell.cd(name); //进入到目录
@@ -55,11 +54,11 @@ const initAction = async (name, option) => {
     }
     installSpinner.succeed(chalk.green('Dependency installed successfully！'));
     //依赖安装完成，提示项目创建成功~
-    require('./icon')();
+    require('../utils/console')();
     console.log(symbols.success, 'Congratulations, the project was successfully created~');
     console.log(symbols.info, `------------------------------------------------------------------`);
     console.log(symbols.info, `Please use -----------'cd ${name} && npm run start'----------- to preview!`);
     console.log(symbols.info, `------------------------------------------------------------------`);
     shell.exit(1);
 };
-module.exports = initAction;
+module.exports = init;

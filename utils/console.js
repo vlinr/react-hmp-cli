@@ -1,6 +1,6 @@
-function icon() {
+function hmpConsole() {
 
-    console.log(`    
+  console.log(`    
 
       /$$   /$$   /$$      /$$   /$$$$$$$ 
      | $$  | $$| | $$$    /$$$| | $$__  $$
@@ -17,4 +17,4 @@ function icon() {
 `);
 }
 
-module.exports = icon;
+module.exports = hmpConsole;
