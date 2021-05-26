@@ -57,7 +57,9 @@ const initAction = async (name, option) => {
     //依赖安装完成，提示项目创建成功~
     require('./icon')();
     console.log(symbols.success, 'Congratulations, the project was successfully created~');
-    console.log(symbols.info, `Please use 'cd ${name} & yarn start' to preview`);
+    console.log(symbols.info, `------------------------------------------------------------------`);
+    console.log(symbols.info, `Please use -----------'cd ${name} && npm run start'----------- to preview!`);
+    console.log(symbols.info, `------------------------------------------------------------------`);
     shell.exit(1);
 };
 module.exports = initAction;
