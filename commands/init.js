@@ -32,15 +32,24 @@ const init = async (name, option) => {
             await clone(`direct:${option.url}`, name, { clone: true });
         }
     } else {
-        await clone(`direct:${remote}`, name, { clone: true });
+
+        //判断是否创建移动版
+        const mobile = await userInput({ start: true });
+        if (mobile) {
+            console.log(`direct:${remote}#mobile`)
+            await clone(`direct:${remote}#mobile`, name, { clone: true });
+        } else {
+            await clone(`direct:${remote}`, name, { clone: true });
+        }
     }
     //清理不需要的文件以及文件夹
     const deleteDir = ['.git', '.gitignore', 'README.md', 'docs'];
     const pwd = shell.pwd();
     deleteDir.map(item => shell.rm('-rf', pwd + `/${name}/${item}`));
     //配置项目
-    const input = await userInput(name);
+    const input = await userInput({ projectName: name });
     if (!input) return false;
+
     //重写配置文件
     await writePackageJson(path.join(pwd.stdout, name, 'package.json'), input);
     //开始安装依赖

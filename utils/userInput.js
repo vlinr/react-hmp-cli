@@ -3,8 +3,23 @@
  * 自定义问题
  * 
  * ******/
-async function userInput(projectName) {
+async function userInput({
+    projectName = '', start = false
+}) {
     const inquirer = require('inquirer');
+    if (start) {
+        const answers = await inquirer.prompt([
+            {
+                type: 'input',
+                message: 'Whether to create a mobile terminal template for you？（Y/n）',
+                default: 'N',
+                name: 'isMobile'
+            }
+        ]);
+        console.log(answers.isMobile);
+        if (answers.isMobile == 'n' || answers.isMobile == 'N' || answers.isMobile == 'No' || answers.isMobile == 'no' || answers.isMobile == 'nO') return false;
+        return true;
+    }
     // 定义需要询问的问题
     const questions = [
         {
@@ -31,6 +46,13 @@ async function userInput(projectName) {
             type: 'input',
             message: 'Please enter your name:',
             name: 'author'
+        },
+
+        {
+            type: 'input',
+            message: 'Are you sure you want to create this project？（Y/n）',
+            default: 'Y',
+            name: 'isConfirm'
         }
     ];
     // 通过inquirer获取到用户输入的内容
@@ -46,15 +68,15 @@ async function userInput(projectName) {
     //         name: 'isConfirm'
     //     }
     // ]);
-    let confirm = await inquirer.prompt([
-        {
-            type: 'input',
-            message: 'Are you sure you want to create this project？（Y/n）',
-            default: 'Y',
-            name: 'isConfirm'
-        }
-    ]);
-    if (confirm.isConfirm == 'n' || confirm.isConfirm == 'N' || confirm.isConfirm == 'No' || confirm.isConfirm == 'no' || confirm.isConfirm == 'nO') return false;
+    // let confirm = await inquirer.prompt([
+    //     {
+    //         type: 'input',
+    //         message: 'Are you sure you want to create this project？（Y/n）',
+    //         default: 'Y',
+    //         name: 'isConfirm'
+    //     }
+    // ]);
+    if (answers.isConfirm == 'n' || answers.isConfirm == 'N' || answers.isConfirm == 'No' || answers.isConfirm == 'no' || answers.isConfirm == 'nO') return false;
     return answers;
 }
 
