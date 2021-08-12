@@ -10,7 +10,11 @@ module.exports = function (remote, name, option) {
             if (err) {
                 downSpinner.fail();
                 console.log(symbols.error, chalk.red(err));
-                reject(err);
+                console.log('You can try the following solutions：\n')
+                console.log('   git config --global user.name name  ');
+                console.log('   git config --global user.email email    \n');
+                console.log('After setting up, you can try again.Good luck~')
+                // reject(err);
                 return;
             };
             downSpinner.succeed(chalk.green('The template file is downloaded successfully！'));
